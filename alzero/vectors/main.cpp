@@ -18,7 +18,6 @@ i = (!argv || !argv[1])? 0 : (argv[1] ? atoi(argv[1]) : 0);
 
 
 
-
   (i == 0) ?  vectorSimpleAlgorithms(): 0;
 
   cout << j << "\t" << k << endl;
