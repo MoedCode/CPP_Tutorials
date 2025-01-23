@@ -3,37 +3,37 @@
 #include <sstream>
 #include <type_traits>
 #include <vector>
+using namespace std;
 
 namespace printlib {
-
 template <typename T>
-std::string to_string(const T& value) {
-    if constexpr (std::is_pointer_v<T>) {
+string to_string(const T& value) {
+    if constexpr (is_pointer_v<T>) {
         if (value == nullptr) {
             return "nullptr";
         }
-        std::ostringstream oss;
+        ostringstream oss;
         oss << value;
         return oss.str();
-    } else if constexpr (std::is_array_v<T>) {
-        std::ostringstream oss;
+    } else if constexpr (is_array_v<T>) {
+        ostringstream oss;
         oss << "[";
-        for (size_t i = 0; i < std::extent_v<T>; ++i) {
+        for (size_t i = 0; i < extent_v<T>; ++i) {
             if (i > 0) oss << ", ";
             oss << to_string(value[i]);
         }
         oss << "]";
         return oss.str();
-    } else if constexpr (std::is_same_v<T, char>) {
-        return std::string(1, value);
+    } else if constexpr (is_same_v<T, char>) {
+        return string(1, value);
     } else {
-        std::ostringstream oss;
+        ostringstream oss;
         oss << value;
         return oss.str();
     }
 }
 
-inline int print_helper(std::ostream& os, const std::string& format, const std::vector<std::string>& args) {
+inline int print_helper(ostream& os, const string& format, const vector<string>& args) {
     size_t pos = 0;
     size_t arg_index = 0;
     int char_count = 0;
@@ -55,32 +55,32 @@ inline int print_helper(std::ostream& os, const std::string& format, const std::
             pos++;
         }
     }
-    os << std::endl;
+    os << endl;
     char_count++; // For the newline character
     return char_count;
 }
 
 template <typename... Args>
 int print(const char* format, Args... args) {
-    std::vector<std::string> arg_strings = {to_string(args)...};
+    vector<string> arg_strings = {to_string(args)...};
 
-    if (format == nullptr || std::string(format).empty()) {
+    if (format == nullptr || string(format).empty()) {
         // Print all arguments without formatting
         int char_count = 0;
         for (size_t i = 0; i < arg_strings.size(); ++i) {
             if (i > 0) {
-                std::cout << ", ";
+                cout << ", ";
                 char_count += 2;
             }
-            std::cout << arg_strings[i];
+            cout << arg_strings[i];
             char_count += arg_strings[i].size();
         }
-        std::cout << std::endl;
+        cout << endl;
         char_count++; // For the newline character
         return char_count;
     } else {
         // Print with format
-        return print_helper(std::cout, format, arg_strings);
+        return print_helper(cout, format, arg_strings);
     }
 }
 
