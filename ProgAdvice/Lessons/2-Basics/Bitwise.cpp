@@ -1,4 +1,3 @@
-```cpp
 #include  "header_b.h"
 /*
 template <typename Type>
@@ -45,21 +44,3 @@ void bitwise(void)
     cout << "(n1 & n3)=> " << (n1 & n3)<< endl;
     cout << "(n1 | n3)=> " << (n1 | n3)<< endl;
 }
-```
-```sh
-
-
-mohamed@DESKTOP-S296B4S /mnt/c/Users/Active/Desktop/Coding/Gradutaion/CPP_Tutorials/ProgAdvice/Lessons/2-Basics
- % g++  -o mainbasics *.cpp && ./mainbasics
- values of n1=> 10, n2=> 2, n3=> 0
-binary values for
- n1=> 0000000000001010,
- n2=> 0000000000000010,
- n3=> 0000000000000010
-(n1 & n2)=> 2
-(n1 | n2)=> 10
-(n1 & n3)=> 0
-(n1 | n3)=> 10
-mohamed@DESKTOP-S296B4S /mnt/c/Users/Active/Desktop/Coding/Gradutaion/CPP_Tutorials/ProgAdvice/Lessons/2-Basics
-
-```

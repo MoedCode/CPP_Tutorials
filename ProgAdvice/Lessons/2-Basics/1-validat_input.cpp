@@ -1,8 +1,7 @@
-#include "./headerbasics.h"
-#include <iostream>
+#include "header_b.h"
 #include <limits>
 
-int main(int argc, char **argv)
+string validate_PWD()
 {
     string PWD1, PWD2;
     int sign = 1;
@@ -29,8 +28,7 @@ int main(int argc, char **argv)
         else
             sign = 0;
 
-
     }
     print("password1 =>{} password2 => {}", PWD1, PWD2);
-    return 0;
+    return PWD1;
 }

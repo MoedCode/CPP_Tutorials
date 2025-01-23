@@ -1,7 +1,7 @@
-#include "headerbasics.h"
+#include "header_b.h"
 
 
-int main(int argc, char **argv)
+int ternary_if(char **argv)
 {
     int n;
     (argv && argv[1]) ? n = atoi(argv[1]) :n = n;
@@ -9,9 +9,9 @@ int main(int argc, char **argv)
     (n < 0) ? cout << "negative-\n" :
     (n  == 0) ? cout << "zero-\n":
     cout << "positive-\n";
-    char *names[]{"name0", "name1", "name2"};
+    const char  *names[]{"name0", "name1", "name2"};
     int IDs[]{1, 2, 3};
-    for (char *name : names)
+    for (const char *name : names)
         {
             static int i = 0;
             if (i == 0)

@@ -1,8 +1,13 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <sstream>
 #include <type_traits>
 #include <vector>
+#include <bitset>
+#include <cstdint>
+#include <limits>
+#include <cmath>
 using namespace std;
 
 namespace printlib {
@@ -82,6 +87,26 @@ int print(const char* format, Args... args) {
         // Print with format
         return print_helper(cout, format, arg_strings);
     }
+}
+inline string Binary(uint64_t number, int systemType=64) {
+    // Validate system type
+    if (systemType != 8 && systemType != 16 && systemType != 32 && systemType != 64 && systemType != 128) {
+        cerr << "Error: Invalid system type. Must be 8, 16, 32, 64, or 128." << endl;
+        return "";
+    }
+
+    // Calculate the number of bits required
+    int bitWidth = systemType;
+
+    // Mask the number to the specified bit width (prevent overflow display)
+    uint64_t mask = (1ULL << bitWidth) - 1;
+    number &= mask;
+
+    // Create a binary string representation using bitset
+    bitset<128> binary(number); // Use 128 bits to handle all system types
+    string binaryStr = binary.to_string().substr(128 - bitWidth);
+
+    return binaryStr;
 }
 
 } // namespace lib0

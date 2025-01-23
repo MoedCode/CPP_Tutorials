@@ -11,7 +11,7 @@
 // Globals
 using namespace std;
 
-// functions declration
+// functions decoration
 void math_functions(void);
 void string_functions();
 int charpcomp(char *charp1 , char *charp2, char *res);
