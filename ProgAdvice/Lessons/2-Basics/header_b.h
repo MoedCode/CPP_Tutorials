@@ -12,5 +12,11 @@ using namespace  printlib;
 // function declaration
 string validate_PWD();
 void bitwise(void);
-
+void  simple_stack();
+void PrintNumbers(int N, int M);
+int ascPrintNum(int n1, int n2);
+int desPrintNum(int n1, int n2);
+int power(int n1, int n2);
+const char* cstrJoin(int count, ...);
+void autovars();
 #endif

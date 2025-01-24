@@ -63,3 +63,28 @@ binary values for
 mohamed@DESKTOP-S296B4S /mnt/c/Users/Active/Desktop/Coding/Gradutaion/CPP_Tutorials/ProgAdvice/Lessons/2-Basics
 
 ```
+
+#include <iostream>
+using namespace std;
+int PrintNumbers(int N, int M)
+{
+
+    if (N <= M)
+    {
+
+     return   PrintNumbers(N + 1, M);
+    }
+    // print("M: {}, N: {}",  M, N);
+}
+
+int main(void)
+{
+
+    // validate_PWD();
+    // bitwise();
+    // simple_stack();
+    int x = PrintNumbers(1,9);
+    printf("x => %i \n", x);
+     return 0;
+
+}
