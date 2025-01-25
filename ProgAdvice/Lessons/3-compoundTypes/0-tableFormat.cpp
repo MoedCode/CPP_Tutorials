@@ -1,7 +1,29 @@
-#include <iostream>
-#include <iomanip>
-#include <cstring>
+/*
+char  *tableFormat( char ***matrix)
+{
 
+    int i = 0, j = 0, len = 0, width = 0, rows = 0, columns = 0;
+    static char buffer[5000];
+    if(!matrix || !matrix[0] || matrix[1] )
+        return 0;
+    columns = atoi(matrix[0][0]);
+    rows = atoi(matrix[0][1]);
+    if (!columns || !rows)
+        return 0;
+     width = (atoi(matrix[0][2])) ? atoi(matrix[0][2]) :0;
+    if(!width)
+        {
+            for (int i = 1; matrix[1][i]; i++)
+            {
+                int len = strlen(matrix[1][j]);
+                if (len > width)
+                    width = len;
+
+            }
+        }
+    return buffer;
+}
+*/
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -120,22 +142,3 @@ char *tableFormat(char ***matrix, char fillChar = ' ')
     return (buffer);
 }
 
-int main() {
-    // Example matrix
-    char *header[] = {"3", "3", nullptr}; // Columns, Rows, Width (optional)
-    char *row1[] = {"Code", "Name", "Mark", nullptr};
-    char *row2[] = {"C101", "Introduction to Programming 1", "95", nullptr};
-    char *row3[] = {"C102", "Computer Hardware", "88", nullptr};
-    char *row4[] = {"C1035243", "Network", "75", nullptr};
-    char **matrix[] = {header, row1, row2, row3, row4, nullptr};
-
-    // Generate the table with a custom fill character
-    char* table = tableFormat(matrix, ' ');
-    if (table) {
-        std::cout << table;
-    } else {
-        std::cerr << "Error: Invalid matrix input." << std::endl;
-    }
-
-    return 0;
-}
