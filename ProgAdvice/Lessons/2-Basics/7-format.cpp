@@ -69,72 +69,104 @@ char  *tableFormat( char ***matrix)
     return buffer;
 }
 */
-char *tableFormat(char*** matrix, char fillChar = ' ') {
-    // Check if the matrix or its first row is NULL
-    if (!matrix || !matrix[0] || !matrix[0][0]) {
-        return nullptr;
-    }
-    int i = 0, j = 0, k = 0,len = 0, columns = 0, rows = 0, bufferIndex = 0;
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+
+/**
+ * tableFormat - Formats a matrix into a table string
+ * @matrix: A 3D array where the first row defines dimensions (columns, rows)
+ *          and subsequent rows contain the table content.
+ * @fillChar: The character used to fill empty spaces in cells (default: space).
+ *
+ * Return: A pointer to a static buffer containing the formatted table string,
+ *         or NULL if the input matrix is invalid.
+ *
+ * The function expects the input matrix to have dimensions defined in the first row:
+ * - matrix[0][0]: Number of columns (as string)
+ * - matrix[0][1]: Number of rows (as string)
+ * The table is formatted with centered text in each cell and separators using '+', '-' and '|'.
+ */
+char *tableFormat(char ***matrix, char fillChar = ' ')
+{
+    int i, j, k, len, padding, columns, rows, bufferIndex;
+    int *colWidths;
     static char buffer[5000];
-    // Extract rows and columns from the matrix
+
+    /* Initialize variables */
+    i = j = k = len = padding = bufferIndex = 0;
+    colWidths = NULL;
+
+    /* Validate input matrix */
+    if (!matrix || !matrix[0] || !matrix[0][0] || !matrix[0][1])
+        return (nullptr);
+
+    /* Extract rows and columns from the matrix */
     columns = atoi(matrix[0][0]);
     rows = atoi(matrix[0][1]);
+    if (columns <= 0 || rows <= 0)
+        return (nullptr);
 
-    // Calculate the maximum width for each column
-    int* colWidths = new int[columns];
-    for (j = 0; j < columns; j++) {
+    /* Allocate memory for column widths */
+    colWidths = new int[columns];
+    if (!colWidths)
+        return (nullptr);
+
+    /* Calculate the maximum width for each column */
+    for (j = 0; j < columns; ++j)
+    {
         colWidths[j] = 0;
-        for (i = 1; matrix[i]; i++) {
-            if (matrix[i][j]) {
+        for (i = 1; i <= rows; ++i)
+        {
+            if (matrix[i][j])
+            {
                 len = strlen(matrix[i][j]);
-                if (len > colWidths[j]) {
+                if (len > colWidths[j])
                     colWidths[j] = len;
-                }
             }
         }
     }
 
-    // Static buffer to store the formatted table
-
-
-
-    // Function to add a line separator to the buffer
+    /* Helper function to add a separator line to the buffer */
     auto addSeparator = [&]() {
         buffer[bufferIndex++] = '+';
-        for (j = 0; j < columns; j++) {
-            for (k = 0; k < colWidths[j] + 2; k++) {
+        for (j = 0; j < columns; ++j)
+        {
+            for (k = 0; k < colWidths[j] + 2; ++k)
                 buffer[bufferIndex++] = '-';
-            }
             buffer[bufferIndex++] = '+';
         }
         buffer[bufferIndex++] = '\n';
     };
 
-    // Add the top separator
+    /* Add the top separator */
     addSeparator();
 
-    // Iterate over rows and columns
-    for (i = 1; matrix[i]; i++) {
+    /* Format the table content row by row */
+    for (i = 1; i <= rows; ++i)
+    {
         buffer[bufferIndex++] = '|';
-        for (j = 0; j < columns; j++) {
+        for (j = 0; j < columns; ++j)
+        {
             buffer[bufferIndex++] = ' ';
 
-            // Center the text in the cell
-            if (matrix[i][j]) {
-                int len = strlen(matrix[i][j]);
-                int padding = (colWidths[j] - len) / 2;
-                for (int k = 0; k < padding; k++) {
+            /* Center the text in the cell */
+            if (matrix[i][j])
+            {
+                len = strlen(matrix[i][j]);
+                padding = (colWidths[j] - len) / 2;
+                for (k = 0; k < padding; ++k)
                     buffer[bufferIndex++] = fillChar;
-                }
                 strcpy(&buffer[bufferIndex], matrix[i][j]);
                 bufferIndex += len;
-                for (int k = 0; k < colWidths[j] - len - padding; k++) {
+                for (k = 0; k < colWidths[j] - len - padding; ++k)
                     buffer[bufferIndex++] = fillChar;
-                }
-            } else {
-                for (int k = 0; k < colWidths[j]; k++) {
+            }
+            else
+            {
+                /* Fill empty cell with the fillChar */
+                for (k = 0; k < colWidths[j]; ++k)
                     buffer[bufferIndex++] = fillChar;
-                }
             }
 
             buffer[bufferIndex++] = ' ';
@@ -142,15 +174,16 @@ char *tableFormat(char*** matrix, char fillChar = ' ') {
         }
         buffer[bufferIndex++] = '\n';
 
-        // Add a separator after each row
+        /* Add a separator after each row */
         addSeparator();
     }
 
-    // Null-terminate the buffer
+    /* Null-terminate the buffer */
     buffer[bufferIndex] = '\0';
 
-    // Clean up
+    /* Free dynamically allocated memory */
     delete[] colWidths;
 
-    return buffer;
+    return (buffer);
 }
+
