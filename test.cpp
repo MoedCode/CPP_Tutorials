@@ -1,38 +1,108 @@
 #include <iostream>
-#include <bitset>
-#include <string>
-#include <cstdint>
-using namespace std;
+#include <iomanip>
+#include <cstring>
 
-// Function to return binary representation as a std::string
-string Binary(uint64_t number, int systemType) {
-    // Validate system type
-    if (systemType != 8 && systemType != 16 && systemType != 32 && systemType != 64 && systemType != 128) {
-        cerr << "Error: Invalid system type. Must be 8, 16, 32, 64, or 128." << endl;
-        return "";
+char* tableFormat(char*** matrix, char fillChar = ' ') {
+    // Check if the matrix or its first row is NULL
+    if (!matrix || !matrix[0] || !matrix[0][0]) {
+        return nullptr;
     }
 
-    // Calculate the number of bits required
-    int bitWidth = systemType;
+    // Extract rows and columns from the matrix
+    int columns = atoi(matrix[0][0]);
+    int rows = atoi(matrix[0][1]);
 
-    // Mask the number to the specified bit width (prevent overflow display)
-    uint64_t mask = (1ULL << bitWidth) - 1;
-    number &= mask;
+    // Calculate the maximum width for each column
+    int* colWidths = new int[columns];
+    for (int j = 0; j < columns; j++) {
+        colWidths[j] = 0;
+        for (int i = 1; matrix[i]; i++) {
+            if (matrix[i][j]) {
+                int len = strlen(matrix[i][j]);
+                if (len > colWidths[j]) {
+                    colWidths[j] = len;
+                }
+            }
+        }
+    }
 
-    // Create a binary string representation using bitset
-    bitset<128> binary(number); // Use 128 bits to handle all system types
-    string binaryStr = binary.to_string().substr(128 - bitWidth);
+    // Static buffer to store the formatted table
+    static char buffer[5000];
+    int bufferIndex = 0;
 
-    return binaryStr;
+    // Function to add a line separator to the buffer
+    auto addSeparator = [&]() {
+        buffer[bufferIndex++] = '+';
+        for (int j = 0; j < columns; j++) {
+            for (int k = 0; k < colWidths[j] + 2; k++) {
+                buffer[bufferIndex++] = '-';
+            }
+            buffer[bufferIndex++] = '+';
+        }
+        buffer[bufferIndex++] = '\n';
+    };
+
+    // Add the top separator
+    addSeparator();
+
+    // Iterate over rows and columns
+    for (int i = 1; matrix[i]; i++) {
+        buffer[bufferIndex++] = '|';
+        for (int j = 0; j < columns; j++) {
+            buffer[bufferIndex++] = ' ';
+
+            // Center the text in the cell
+            if (matrix[i][j]) {
+                int len = strlen(matrix[i][j]);
+                int padding = (colWidths[j] - len) / 2;
+                for (int k = 0; k < padding; k++) {
+                    buffer[bufferIndex++] = fillChar;
+                }
+                strcpy(&buffer[bufferIndex], matrix[i][j]);
+                bufferIndex += len;
+                for (int k = 0; k < colWidths[j] - len - padding; k++) {
+                    buffer[bufferIndex++] = fillChar;
+                }
+            } else {
+                for (int k = 0; k < colWidths[j]; k++) {
+                    buffer[bufferIndex++] = fillChar;
+                }
+            }
+
+            buffer[bufferIndex++] = ' ';
+            buffer[bufferIndex++] = '|';
+        }
+        buffer[bufferIndex++] = '\n';
+
+        // Add a separator after each row
+        addSeparator();
+    }
+
+    // Null-terminate the buffer
+    buffer[bufferIndex] = '\0';
+
+    // Clean up
+    delete[] colWidths;
+
+    return buffer;
 }
 
 int main() {
-    // Test cases
-    cout << "8-bit: " << Binary(255, 8) << endl;
-    cout << "16-bit: " << Binary(65535, 16) << endl;
-    cout << "32-bit: " << Binary(4294967295, 32) << endl;
-    cout << "64-bit: " << Binary(1844674407370955161, 64) << endl;
-    // cout << "128-bit: " << Binary(340282366920938463463374607431768211455ULL, 128) << endl;
+    // Example matrix
+    char *header[] = {"3", "3", nullptr}; // Columns, Rows, Width (optional)
+    char *row1[] = {"Code", "Name", "Mark", nullptr};
+    char *row2[] = {"C101", "Introduction to Programming 1", "95", nullptr};
+    char *row3[] = {"C102", "Computer Hardware", "88", nullptr};
+    char *row4[] = {"C1035243", "Network", "75", nullptr};
+    char **matrix[] = {header, row1, row2, row3, row4, nullptr};
+
+    // Generate the table with a custom fill character
+    char* table = tableFormat(matrix, ' ');
+    if (table) {
+        std::cout << table;
+    } else {
+        std::cerr << "Error: Invalid matrix input." << std::endl;
+    }
 
     return 0;
 }

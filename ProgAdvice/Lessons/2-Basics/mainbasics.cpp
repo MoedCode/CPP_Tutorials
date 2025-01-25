@@ -1,5 +1,6 @@
 #include  "header_b.h"
 
+#include <charconv>
 #include <unistd.h>
 
 using namespace printlib;
@@ -23,8 +24,9 @@ int main(void)
 	// cout << y << endl;
 	// cout << power(1, 9) << endl;
 	// cout << cstrJoin(3, charp1, ' ',charp2) << endl;
-	autovars();
-
+	// autovars();
+	intformat();
+	 charsFormat();
 	 return 0;
 
 }

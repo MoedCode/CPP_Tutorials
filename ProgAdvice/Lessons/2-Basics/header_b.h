@@ -19,4 +19,7 @@ int desPrintNum(int n1, int n2);
 int power(int n1, int n2);
 const char* cstrJoin(int count, ...);
 void autovars();
+void intformat();
+void  charsFormat();
+
 #endif
