@@ -6,6 +6,8 @@
 
 int main(void)
 {
+	printMatrixTestCases();
+	vectores();
 
 	 return 0;
 

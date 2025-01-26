@@ -109,4 +109,137 @@ inline string Binary(uint64_t number, int systemType=64) {
     return binaryStr;
 }
 
+/**
+
+
+
+ */
+template<typename PAT>
+int printArray(PAT arr, int length, const char* F = nullptr, const char* idx = nullptr)
+
+{
+    int i = 0;
+    if (!arr)
+        return -1;
+
+    // Print opening delimiter
+    int c = 0;
+    for(; F && F[c] && F[c] != '%'; c++)
+        cout << F[c];
+
+    // Iterate through the array
+    for (i = 0; i < length; i++) {
+        // Print index and value if idx is provided
+        if (idx) {
+            for (int j = 0; idx[j]; j++) {
+                if (idx[j] == '%' && idx[j + 1] == 'i') {
+                    cout << i;
+                    j++; // Skip the next character ('i')
+                } else if (idx[j] == '%' && idx[j + 1] == 'v') {
+                    cout << arr[i];
+                    j++; // Skip the next character ('v')
+                } else {
+                    cout << idx[j];
+                }
+            }
+        } else {
+            // Print the element directly
+            cout << arr[i];
+        }
+
+        // Print separator if there is a next element
+        if (i < length - 1)
+            cout << " ";
+    }
+
+    // Print closing delimiter
+    if (F) {
+        c++;
+        for(; F[c]; c++)
+            cout << F[c];
+    }
+
+    return 0;
+}
+
+template<typename PMT>
+int printMatrix(PMT arr, int rownum, int colnum, const char* F = nullptr, const char* idx = nullptr, char end = '\n')
+{
+    int c = 0;
+    for(; F && F[c] && F[c] != '%'; c++)
+        cout << F[c];
+    cout << endl;
+    for(int i = 0; i < rownum; i++) {
+        printArray(arr[i], colnum, F, idx);
+        if (i < rownum )
+            cout << end;
+    }
+
+    if (F) {
+        c++;
+        for(; F[c]; c++)
+            cout << F[c];
+    }
+    cout << endl;
+
+    return 0;
+}
+
+template<typename PAFT>
+size_t printf_array(PAFT array, size_t size, const char *idxF, const char* arrF = "%ar")
+{
+    size_t i, x = 0;
+
+    if (!array || !idxF)
+    {
+        (!idxF) ? cerr <<  "NULL format\n" : cerr << "NULL array\n";
+        return -1;
+    }
+
+    for(i = 0; arrF[i] ; ++i)
+    {
+        if(arrF[i] == '%' && arrF[i + 1] =='a' && arrF[i + 2] =='r' )
+        {
+            i +=3;
+            for(size_t j = 0; j < size; j++)
+                x += printf(idxF, array[j]);
+
+        }
+
+        cout << arrF[i] ;
+    }
+    return (x + i);
+}
+
+template <typename PMFT>
+size_t printf_matrix(PMFT matrix, size_t rows, size_t cols, const char *idxF, const char *matF = "%Mx", const char *rowF = "%ar")
+{
+
+    size_t i, x = 0;
+
+    if (!matrix || !idxF )
+    {
+        cerr << "NULL argument passed to printf_matrix\n";
+        return -1;
+    }
+
+    for (i = 0; matF[i]; ++i)
+    {
+        if (matF[i] == '%' && matF[i + 1] == 'M' && matF[i + 2] == 'x')
+        {
+            i += 2; // Skip "%Mx"
+            for (size_t r = 0; r < rows; r++)
+            {
+                x += printf_array(matrix[r], cols, idxF, rowF);
+
+            }
+        }
+        else
+        {
+            cout << matF[i];
+        }
+    }
+    return (x + i);
+}
+
 } // namespace lib0
