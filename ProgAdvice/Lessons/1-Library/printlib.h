@@ -37,7 +37,14 @@ string to_string(const T& value) {
         return oss.str();
     }
 }
-
+/**
+ * @brief
+ *
+ * @param os
+ * @param format
+ * @param args
+ * @return int
+ */
 inline int print_helper(ostream& os, const string& format, const vector<string>& args) {
     size_t pos = 0;
     size_t arg_index = 0;
@@ -109,11 +116,7 @@ inline string Binary(uint64_t number, int systemType=64) {
     return binaryStr;
 }
 
-/**
 
-
-
- */
 template<typename PAT>
 int printArray(PAT arr, int length, const char* F = nullptr, const char* idx = nullptr)
 
@@ -184,7 +187,16 @@ int printMatrix(PMT arr, int rownum, int colnum, const char* F = nullptr, const 
 
     return 0;
 }
-
+/**
+ * @brief : printf_array - iterate over array print its indexes using printf
+ *
+ * @tparam PAFT : array type,
+ * @param array : array to be print
+ * @param size : array size
+ * @param idxF : array index format will to be passed to printf
+ * @param arrF : array format
+ * @Return size_t : (-1) on error , else number of character printed
+ */
 template<typename PAFT>
 size_t printf_array(PAFT array, size_t size, const char *idxF, const char* arrF = "%ar")
 {
@@ -212,6 +224,17 @@ size_t printf_array(PAFT array, size_t size, const char *idxF, const char* arrF 
 }
 
 template <typename PMFT>
+/**
+ * @brief printf_matrix - print matrix iterate over row print it using printf_array
+ *
+ * @param matrix : matrix to be print
+ * @param rows : number of row
+ * @param cols : number of columns
+ * @param idxF : array index format will to be passed to printf to be passed to printf_array
+ * @param matF :matrix format
+ * @param rowF : to be passed to printf_array as array format
+ * @return size_t : number of character printed
+ */
 size_t printf_matrix(PMFT matrix, size_t rows, size_t cols, const char *idxF, const char *matF = "%Mx", const char *rowF = "%ar")
 {
 

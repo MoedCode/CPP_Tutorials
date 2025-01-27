@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <vector>
 using namespace std;
 
 // Function declarations with default arguments
