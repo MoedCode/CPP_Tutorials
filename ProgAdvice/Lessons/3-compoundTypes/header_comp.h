@@ -8,7 +8,9 @@ using namespace std;
 
 // Function declarations with default arguments
 
-void printMatrixTestCases();
-int vectores();
+void printMatrixTestCases(void);
+int testVectores(void);
+ void TestGetData(void);
 
+string getUserAnswer(const char **questionArr, size_t size,char  action = 'r' );
 #endif

@@ -1,9 +1,9 @@
-#include "header_comp.h"
+// #include "header_comp.h"
 
 #include "../1-Library/printlib.h"
 using namespace printlib;
 
-void printMatrixTestCases()
+void printMatrixTestCases(void)
 {
     int intnum[] = {100, 400, 200, 300, 400, 500}; // Not null-terminated
     char str[] = "HI!"; // Null-terminated
