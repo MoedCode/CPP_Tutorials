@@ -21,7 +21,7 @@ typedef double  D;
 typedef long double  LD;
 typedef char C;
 typedef const char CC;
-typedef const char *  CP;
+
 typedef const char * C_CP;
 typedef vector<I>::iterator  VII ;
 //macros

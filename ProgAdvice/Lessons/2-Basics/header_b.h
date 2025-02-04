@@ -21,5 +21,6 @@ const char* cstrJoin(int count, ...);
 void autovars();
 void intformat();
 void  charsFormat();
+void pointers();
 
 #endif

@@ -1,15 +1,11 @@
 #include  "header_comp.h"
 #include "get_data.h"
-#include <cstddef>
-#include <cstdio>
-#include <list>
-#include <string>
 
-int main(void)
+int main()
 {
 	// printMatrixTestCases();
 	// testVectores();
- 	//  TestGetData();
+
 
 
 	const char *questions[] ={
@@ -22,13 +18,9 @@ int main(void)
 		"Thanks, you're all set. We will contact you!"
 
 		};
-	// getUserAnswer(questions,(size_t) 10);
-	string res = getUserAnswer(questions, 10);
+	// vectorMethods();
 
-	FILE *f = fopen("out", "a");
-	fprintf(f, "%s \n\n", res.data());
-	fclose(f);
-	cout << res << endl;
-	 return 0;
+	employee();
+
 
 }
