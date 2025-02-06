@@ -25,12 +25,12 @@ typedef const char *  CCP;
 typedef const char * strLtr;
 typedef vector<I>::iterator  VII ;
 // Function declarations with default arguments
+void Dynamic_pointers0();
 
-void printMatrixTestCases(void);
-int testVectores(void);
-void vectorMethods(void);
-void  employee();
+int get_students_grades();
+void  vector_iterate();
 
+void stringMethods();
 
 
 

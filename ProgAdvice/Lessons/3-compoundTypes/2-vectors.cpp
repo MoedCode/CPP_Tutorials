@@ -3,6 +3,7 @@
 
 
 #include "../1-Library/printlib.h"
+#include <string>
 // using namespace printlib;
 
 
@@ -59,6 +60,28 @@ int testVectores(void)
 	user.clear() ;
 	cout << "\n---after clear---\n";
 	for (const char * &entry : user)cout << entry << endl;
+
+
+}
+void  vector_iterate()
+{
+	// use constant if you just read from vector elements
+	// use & to read value from victor directly without coping it first
+	vector <string> names {"name1", "name2", "name3"};
+	for(const string &name : names)
+		cout << name << endl;
+	// for(string &name : names)
+	// {
+	// 	name += "ss";
+	// 	cout << name << endl;
+	// }
+	cout << "names[0]: " << names[0]<<endl;
+	cout << "names.at(0): " << names.at(0)<<endl;
+	// cout << __FILE__ << " line: "<<__LINE__ << endl;
+
+	// cout << "names[3]: " << names[3]<<endl;
+	// cout << __FILE__ << " line: "<<__LINE__ << endl;
+	// cout << "names.at(3): " << names.at(3)<<endl;
 
 
 }

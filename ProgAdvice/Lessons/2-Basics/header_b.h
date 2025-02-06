@@ -22,5 +22,5 @@ void autovars();
 void intformat();
 void  charsFormat();
 void pointers();
-
+void voidPointers();
 #endif

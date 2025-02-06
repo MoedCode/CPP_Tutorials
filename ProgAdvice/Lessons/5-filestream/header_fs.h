@@ -1,10 +1,12 @@
-#ifndef HEADER_COMP_H
-#define HEADER_COMP_H
+#ifndef HEADER_FS_H
+#define HEADER_FS_H
+
 
 #include <iostream>
-#include <cstring>
+// #include <cstring>
 #include <string>
-#include <vector>
+#include<fstream>
+// #include <vector>
 using namespace std;
 using namespace std;
 typedef int I;
@@ -23,13 +25,8 @@ typedef const char CC;
 typedef char * CP;
 typedef const char *  CCP;
 typedef const char * strLtr;
-typedef vector<I>::iterator  VII ;
+// typedef vector<I>::iterator  VII ;
 // Function declarations with default arguments
-
-void printMatrixTestCases(void);
-int testVectores(void);
-void vectorMethods(void);
-void  employee();
 
 
 

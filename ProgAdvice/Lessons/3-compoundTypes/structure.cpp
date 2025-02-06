@@ -65,7 +65,4 @@ void  employee()
     cout << "(*ptr0).email: " << (*ptr0).email << endl;
     cout << "ptr1.email: " << ptr1.email << endl;
 
-
-
-
 }
