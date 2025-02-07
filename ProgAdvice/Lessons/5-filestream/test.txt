@@ -1,2 +1,11 @@
+Just a statement to practice file stream in C++
+Another statement to practice file stream in C++
 just a statement  to practice file stream in C++
 other statement  to practice file stream in C++
+just a statement  to practice file stream in C++
+other statement  to practice file stream in C++
+just a statement  to practice file stream in C++
+other statement  to practice file stream in C++
+
+ohohoho
+ohohoho

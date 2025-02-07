@@ -6,6 +6,7 @@
 // #include <cstring>
 #include <string>
 #include<fstream>
+#include <vector>
 // #include <vector>
 using namespace std;
 using namespace std;
@@ -28,7 +29,10 @@ typedef const char * strLtr;
 // typedef vector<I>::iterator  VII ;
 // Function declarations with default arguments
 
-
+int Fwrite(string file_path, string mode,  string data);
+string Fread(string file_path);
+int FileInVector(string filePath, vector<string>& fileContent);
+int VectorToFile( vector<string>& fileContent, string filePath = "vOut.txt", string mode = "a");
 
 
 #endif
