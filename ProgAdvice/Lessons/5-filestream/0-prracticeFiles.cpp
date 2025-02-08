@@ -183,9 +183,22 @@ int sed_exe(string filePath, string command)
         return 1;
 
     }
-        if (TCV.size() == 3 )
+        if (TCV.size() >= 3 )
     {
-        line_num = atoi(TCV.at(1).substr(1).data());
+        if(TCV.size() == 3)
+        {
+            line_num = atoi(TCV.at(1).substr(1).data());
+            action ="cout";
+            statement = TCV.at(2);
+
+        }
+        if(TCV.size() > 3)
+        {
+            line_num = atoi(TCV.at(2).substr(1).data());
+            action = "ios";
+            statement = TCV.at(3);
+
+        }
         // cout << "line: " << line_num <<  "substr(0).data():" << TCV.at(1).substr(1)<< endl;
         if (!line_num || line_num > fileContent.size())
             {
@@ -194,13 +207,15 @@ int sed_exe(string filePath, string command)
                 return 2;
             }
 
-        action = "cout";
-        statement = TCV.at(2);
         // cout << "statement : " + statement + "\n";
         fileContent.insert(fileContent.begin() + line_num ,1,statement);
         cout << endl;
-        for (string &line : fileContent )
-                cout << line + "\n";
+        if (action == "cout")
+            for (string &line : fileContent )
+                    cout << line + "\n";
+        if(action == "ios")
+            VectorToFile(fileContent, filePath,"w");
+
         return 0;
     }
     // cout << TCV.size() << endl;

@@ -8,5 +8,6 @@ just a statement  to practice file stream in C++
 other statement  to practice file stream in C++
 
 
+10i Hello, this is a new line
 ohohoho
 ohohoho
