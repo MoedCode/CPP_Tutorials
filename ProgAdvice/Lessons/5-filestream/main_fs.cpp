@@ -1,16 +1,14 @@
 #include "header_fs.h"
 #include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+
 
 int main() {
     cout << " ______ File Stream _______ \n\n\a";
-    char filePath[] = "test.txt";
-    // string result =  Fread(filePath);
-    // if (!result.empty()) cout << result;
-    // else cout << "nullptr\n";
-    vector<string> filecontent;
-    FileInVector(filePath, filecontent);
-    filecontent.push_back("ohohoho");
-    VectorToFile(filecontent, filePath, "w");
+    editFile("test.txt");
+
     return 0;
 
 }
