@@ -33,7 +33,8 @@ int Fwrite(string file_path, string mode,  string data);
 string Fread(string file_path);
 int FileInVector(string filePath, vector<string>& fileContent);
 int VectorToFile( vector<string>& fileContent, string filePath = "vOut.txt", string mode = "a");
-int editFile(string filePath);
+int editInterActive(string filePath);
+int appArgsMode(string filePath ,string command);
 
 
 #endif

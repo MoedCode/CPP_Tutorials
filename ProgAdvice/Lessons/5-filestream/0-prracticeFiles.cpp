@@ -171,6 +171,8 @@ int sed_exe(string filePath, string command)
     a<line number> for append before specific line \n\
     \n ";
     TCV = tokenizeCommand(command);
+    for (string  &s  : TCV)
+        cout << ": "  + s + '\t';
     if (TCV.at(1) == "-h" || TCV.at(1) == "help" || TCV.at(1) == "--help")
         {
             cout << help + "\n \a";
@@ -311,8 +313,55 @@ int updateInFile(string filePath, string command)
     VectorToFile( fileContent, filePath, "w");
     return 0; // Success
 }
+                         // appArgsMode
+/**
+ * @brief
+ *
+ * @param filePath
+ * @param command
+ * @return int
+ */
+int appArgsMode(string filePath ,string command)
+{
+    if (command == "exit")
+        return  0;
+if (command == "cat")
+    {
+        string result =  Fread(filePath);
+        if (!result.empty()) cout << result;
+        else
+            {
+                cerr << "error: reading file \"" + filePath + "\" \n";
+                return 3;
+            }
+        return  0;
+    }
+    if (startsWith(command, "del:"))
+    del(filePath, command);
 
-int editFile(string filePath)
+if (startsWith(command, "/:"))
+    {
+        search(filePath, command);
+    }
+if (startsWith(command, "sed"))
+{
+    sed_exe(filePath, command);
+}
+if(startsWith(command, "rep:"))
+{
+    updateInFile(filePath, command);
+}
+
+    return 0;
+}
+                            //InterActiveMode
+/**
+ * @brief
+ *
+ * @param filePath
+ * @return int
+ */
+int InterActiveMode(string filePath)
 {
     string line;
 

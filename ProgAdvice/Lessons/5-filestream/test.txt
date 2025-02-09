@@ -1,6 +1,7 @@
 Just a statement to practice file stream in C++
 other statement  to practice file stream in C++
 Another statement to practice file stream in C++
+Hello, this is a new line2
 welcome tutorial practice file stream in C++
- Hello, this is a n
-Hello, this is a new line  after line 5
+
+
