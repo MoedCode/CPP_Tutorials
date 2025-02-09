@@ -224,6 +224,94 @@ int sed_exe(string filePath, string command)
 
     return 0;
 }
+
+                            // Search
+/**
+ * @brief
+ *
+ * @param filePath
+ * @param line
+ * @return int
+ */
+int search(string filePath, string line)
+{
+    string sentence = line.substr(2);
+    // string result =  Fread(filePath);
+    vector<string>fileContent;
+    FileInVector(filePath, fileContent);
+    int i = 0, pos,res=0;
+    for(string &vline : fileContent)
+        {
+            ++i;
+            int LineRes = vline.find(sentence);
+            if(LineRes != vline.npos)
+            {
+                res = 1;
+                pos = LineRes;
+                break;
+            }
+        }
+    if(res)
+    {
+        printf("Line: %i, col: %i",i , pos + 1);
+        return 0;;
+    }
+
+    cout << "no matching for " + sentence + "\n";
+    return 2;
+}
+int del(string filePath, string line)
+{
+    string sentence = line.substr(4);
+    // cout << sentence + '\n';
+    string result =  Fread(filePath);
+    if(result.empty())
+    {
+        cout << "cant find \"" + sentence + "\"\n";
+        return 2;
+    }
+    delW(result, sentence);
+    stringTofile(filePath, result, "w");
+    return 0;
+}
+
+int updateInFile(string filePath, string command)
+{
+    if (command.substr(0, 4) != "rep:") return 1; // Invalid command format
+
+    size_t firstQuote = command.find('"');
+    if (firstQuote == string::npos) return 2;
+    size_t secondQuote = command.find('"', firstQuote + 1);
+    if (secondQuote == string::npos) return 3;
+    size_t thirdQuote = command.find('"', secondQuote + 1);
+    if (thirdQuote == string::npos) return 4;
+    size_t fourthQuote = command.find('"', thirdQuote + 1);
+    if (fourthQuote == string::npos) return 5;
+
+    string target = command.substr(firstQuote + 1, secondQuote - firstQuote - 1);
+    string replacement = command.substr(thirdQuote + 1, fourthQuote - thirdQuote - 1);
+
+    vector<string> fileContent;
+    FileInVector(filePath, fileContent);
+
+    bool replaced = false;
+    for (auto& line : fileContent)
+    {
+        size_t pos = line.find(target);
+        if (pos != string::npos)
+        {
+            line.replace(pos, target.length(), replacement);
+            replaced = true;
+            break; // Replace only the first occurrence in the file
+        }
+    }
+
+    if (!replaced) return 6; // Target word not found
+
+    VectorToFile( fileContent, filePath, "w");
+    return 0; // Success
+}
+
 int editFile(string filePath)
 {
     string line;
@@ -242,74 +330,22 @@ int editFile(string filePath)
             }
         if (startsWith(line, "del:"))
         {
-            string sentence = line.substr(4);
-            // cout << sentence + '\n';
-            string result =  Fread(filePath);
-            if(result.empty())
-                continue;
-            delW(result, sentence);
-            stringTofile(filePath, result, "w");
+            del(filePath, line);
             continue;
         }
         if (startsWith(line, "/:"))
-        {
-            string sentence = line.substr(2);
-            // string result =  Fread(filePath);
-            vector<string>fileContent;
-            FileInVector(filePath, fileContent);
-            int i = 0, pos,res=0;
-            for(string &vline : fileContent)
-                {
-                    ++i;
-                    int LineRes = vline.find(sentence);
-                    if(LineRes != vline.npos)
-                    {
-                        res = 1;
-                        pos = LineRes;
-                        break;
-                    }
-                }
-            if(res)
             {
-                printf("Line: %i, col: %i",i , pos + 1);
+                search(filePath, line);
                 continue;
             }
-            if(!res)
-            {
-                cout << "no matching for " + sentence + "\n";
-            }
-
-        }
-        if (startsWith(line, "sed")) {
+        if (startsWith(line, "sed"))
+        {
             sed_exe(filePath, line);
-            // vector<string> fileContent;
-            // FileInVector(filePath, fileContent);
-
-            // string args = line.substr(3);  // Remove "sed_exe"
-            // bool inplace = (args.find("-i") != string::npos);  // Check for -i flag
-
-            // size_t pos_i = args.find("i ");
-            // if (pos_i == string::npos) {
-            //     cout << pos_i << " =>" + args + "\n";
-            //     cerr << "Invalid sed_exe command format\n";
-            //     continue;
-            // }
-
-            // string line_num_str = args.substr(0, pos_i);
-            // string text_to_insert = args.substr(pos_i + 2);
-
-            // // Check if line_num_str is a valid number
-            // if (line_num_str.empty() || !all_of(line_num_str.begin(), line_num_str.end(), ::isdigit)) {
-            //     cerr << "Invalid line number format\n";
-            //     continue;
-            // }
-
-            // int line_num = stoi(line_num_str);
-            // if (line_num <= 0 || line_num > fileContent.size() + 1) {
-            //     cerr << "Invalid line number\n";
-            //     continue;
-            // }
-
+            continue;
+        }
+        if(startsWith(line, "rep:"))
+        {
+            updateInFile(filePath, line);
         }
     }
 
