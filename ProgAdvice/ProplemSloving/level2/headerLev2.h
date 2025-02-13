@@ -13,6 +13,12 @@ typedef const char **  CC2P;
 LD getPosDouble(CCP msg = "Type Amount: ") ;
 ULI getUInt(CCP msg = "Type Amount: ") ;
 LLI DrawMultiplicationTable(int from=1 , int to=10);
+int   isPerfect(LLI N);
+int   isPerfect_(LLI N, int print=1);
+string intToCharB(LLI N);
+int reverseBuffer(char *buffer);
+
+int PrintPerfectNumbersFrom1ToN(int Number);
 
 
 #endif
