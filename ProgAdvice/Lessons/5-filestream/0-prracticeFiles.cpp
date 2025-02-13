@@ -401,3 +401,6 @@ int InterActiveMode(string filePath)
 
     return 0;
 }
+#include <iostream>
+#include <string>
+typedef const char *  CCP;

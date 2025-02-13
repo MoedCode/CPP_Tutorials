@@ -4,4 +4,3 @@ Another statement to practice file stream in C++
 Hello, this is a new line2
 welcome tutorial practice file stream in C++
 
-
