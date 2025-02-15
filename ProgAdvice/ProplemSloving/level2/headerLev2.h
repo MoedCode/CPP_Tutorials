@@ -29,10 +29,12 @@ lli sumOfBuffDigits(ccp buffer, int *steps=0);
 lli reversIntDigits(lli N);
 ccp digitFreqInLLInt(lli N, int digit);
 ccp LLIntDigitsFrequency(lli N);
+ccp numberPattern(lli N, int inverted = 0);
 void printDigitInOrder(lli N);
 bool isPalindromeInt(lli N);
 
 int PrintPerfectNumbersFrom1ToN(int Number);
+ccp charsPattern(lli N, bool invert=0, bool upper=1);
 
 
 #endif

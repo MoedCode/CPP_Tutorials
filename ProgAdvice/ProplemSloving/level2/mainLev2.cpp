@@ -1,12 +1,13 @@
 #include "headerLev2.h"
-#include <iterator>
-#include <string>
+#include <cstdlib>
 
 int main(int argc, cc2p argv)
 {
+    lli N = getUInt("type number to print inverted pattern: ");
     int steps = 0, digit0 = 8;
-    lli N0 = 12321, N1 = 12233456788 ,N2 = 12233456788;
+    // lli N0 = 12321, N1 = 12233456788 ,N2 = 12233456788, N3 = 12345;
     /*
+
     DrawMultiplicationTable();
     string x = intToCharB(123456);
     string _x = intToCharB(-123456);
@@ -20,11 +21,18 @@ int main(int argc, cc2p argv)
      cout << digitFreqInLLInt(N1, digit0) << endl;
      cout << LLIntDigitsFrequency(N1) << endl;
      printDigitInOrder(N1);
-      */
-      unsigned long long int x ;
-      printf("N0:%lli , N1:%lli, N2::%lli \n",N0, N1, N2);
-      cout << "isPalindromeInt(N0): " <<isPalindromeInt(N0)<<endl;
+    cout << "isPalindromeInt(N0): " <<isPalindromeInt(N0)<<endl;
       cout << "isPalindromeInt(N1): " <<isPalindromeInt(N1)<<endl;
       cout << "isPalindromeInt(N2): " <<isPalindromeInt(N2)<<endl;
-      return 0;
+        printf("N:%lli \n",N);
+    cout << "inverted Pattern :\n" << numberPattern(N)<< endl;
+    cout << "inverted inverted Pattern for :\n" << numberPattern(N, 1)<< endl;
+      */
+
+    cout << charsPattern(N) << endl;
+    cout << charsPattern(N, 1) << endl;
+    cout << charsPattern(N, 0, 0) << endl;
+    cout << charsPattern(N, 1, 0) << endl;
+
+    return 0;
 }
