@@ -3,9 +3,10 @@
 
 
 
-LLI  PrintDigits(LLI Number)
+lli  PrintDigits(lli Number)
 {
-LLI Remainder, steps = 0;
+lli Remainder, steps = 0;
+cout << __FILE__ << " : " << __LINE__ << endl;
     while (Number > 0)
     {
         Remainder = Number % 10;
@@ -15,6 +16,7 @@ LLI Remainder, steps = 0;
     return  steps;
 }
 // Function to reverse a buffer in place
+
 int reverseBuffer(char *buffer)
 {
     if (buffer == nullptr) return -1;  // Error: NULL buffer
@@ -32,7 +34,7 @@ int reverseBuffer(char *buffer)
 }
 
 // Function to convert integer to character string
-string intToCharB(LLI N) {
+string intToCharB(lli N) {
     string Nbuff;  // Static buffer
     int i = 0;
 
@@ -53,7 +55,7 @@ string intToCharB(LLI N) {
 
     return  Nbuff.data();
 }
-int callPrintDigit(int argc , CCP argv[])
+int callPrintDigit(int argc , ccp argv[])
 {
     if(argc >= 2)
         PrintDigits(atoi(argv[1]));

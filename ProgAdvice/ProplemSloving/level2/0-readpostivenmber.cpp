@@ -7,9 +7,9 @@
      * @return long double
      */
 
-      LD getPosDouble(CCP msg )
+      ld getPosDouble(ccp msg )
      {
-        LD Amount;
+        ld Amount;
 
         while (true) {
             cout << msg;
@@ -37,9 +37,9 @@
      */
 
 
-    ULI getUInt(CCP msg)
+    llu getUInt(ccp msg)
      {
-        ULI Amount;
+        llu Amount;
 
         while (true) {
             cout << msg;

@@ -1,5 +1,5 @@
 #include "headerLev2.h"
-int   isPerfect(LLI N)
+int   isPerfect(lli N)
 {
     int Sum = 0;
     for (int i = 1; i < N; i++)

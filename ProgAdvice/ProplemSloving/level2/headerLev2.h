@@ -3,22 +3,39 @@
 
 #include <iostream>
 using namespace std;
-typedef unsigned long int ULI;
-typedef long long int LLI;
-typedef long double  LD;
-typedef char * CP;
-typedef const char *  CCP;
-typedef const char **  CC2P;
+typedef unsigned long int llu;
+typedef long long int lli;
+typedef long double  ld;
+typedef char * cp;
+typedef const char *  ccp;
+typedef const char **  cc2p ;
 //functions declaration
-LD getPosDouble(CCP msg = "Type Amount: ") ;
-ULI getUInt(CCP msg = "Type Amount: ") ;
-LLI DrawMultiplicationTable(int from=1 , int to=10);
-int   isPerfect(LLI N);
-int   isPerfect_(LLI N, int print=1);
-string intToCharB(LLI N);
+//  #define DEBUG(msg) cout << __FILE__ << " : " << __LINE__ <<(msg )?msg:" " << endl;
+ #define DEBUG_M(msg) cout << __FILE__ << " : " << __LINE__ << " " << ((msg) ? (msg) : " ") << endl;
+ #define DEBUG cout << __FILE__ << " : " << __LINE__ <<  << endl;
+
+
+
+lli  PrintDigits(lli Number);
+ld getPosDouble(ccp msg = "Type Amount: ") ;
+llu getUInt(ccp msg = "Type Amount: ") ;
+lli DrawMultiplicationTable(int from=1 , int to=10);
+int   isPerfect(lli N);
+int   isPerfect_(lli N, int print=1);
+string intToCharB(lli N);
 int reverseBuffer(char *buffer);
+int SumOfNDigits(lli  N, int *steps=0);
+lli sumOfBuffDigits(ccp buffer, int *steps=0);
+lli reversIntDigits(lli N);
+ccp digitFreqInLLInt(lli N, int digit);
+ccp LLIntDigitsFrequency(lli N);
+void printDigitInOrder(lli N);
+bool isPalindromeInt(lli N);
 
 int PrintPerfectNumbersFrom1ToN(int Number);
 
 
 #endif
+
+//find . -type f -name "*.cpp" -exec sed -i 's/LD /ld /g' {} +
+//find . -type f -name "*.cpp" -exec sed -i 's/ccp /ccp /g' {} + && find . -type f -name "*.h" -exec sed -i 's/ccp /ccp /g' {} +

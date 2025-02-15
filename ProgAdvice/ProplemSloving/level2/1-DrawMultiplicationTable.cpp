@@ -1,7 +1,7 @@
 #include "headerLev2.h"
 #include <iomanip>
 #include <iostream>
-LLI DrawMultiplicationTable(int from , int to)
+lli DrawMultiplicationTable(int from , int to)
 {
     // iterators
     int i = from, j = from,steps = 0;
