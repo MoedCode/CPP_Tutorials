@@ -1,12 +1,7 @@
-#include <climits>
-#include <cstdint>
-#include <iostream>
-#include <cstring>
-#include <string>
 
-using namespace std;
 
-typedef const char * ccp;
+#include "headerLev2.h"
+
 
 // Dummy password to crack
 const char *thePWD = "A$D@Z";
@@ -15,7 +10,7 @@ bool check_PWD(ccp PWD) {
     return !strcmp(PWD, thePWD);
 }
 
-ccp crackPWD(size_t size , bool useMaxTrial = true, size_t maxTrial=SIZE_MAX) {
+ccp crackPWD(size_t size , bool useMaxTrial, size_t maxTrial) {
 
     static string word; // Start with all spaces
     static string msg;
@@ -55,7 +50,7 @@ ccp crackPWD(size_t size , bool useMaxTrial = true, size_t maxTrial=SIZE_MAX) {
     }
 }
 
-int main() {
-    cout << crackPWD(5) << endl; // Trying to crack a 3-character password
-    return 0;
-}
+// int main() {
+//     cout << crackPWD(5) << endl; // Trying to crack a 3-character password
+//     return 0;
+// }

@@ -1,7 +1,12 @@
 #ifndef HEADERLEV2__H
 #define HEADERLEV2__H
 
+#include <cstdint>
 #include <iostream>
+#include <climits>
+#include <cstring>
+#include <string>
+
 using namespace std;
 typedef unsigned long int llu;
 typedef long long int lli;
@@ -36,6 +41,8 @@ bool isPalindromeInt(lli N);
 int PrintPerfectNumbersFrom1ToN(int Number);
 ccp charsPattern(lli N, bool invert=0, bool upper=1);
 
+    bool check_PWD(ccp PWD);
+    ccp crackPWD(size_t size , bool useMaxTrial = true, size_t maxTrial=SIZE_MAX);
 
 #endif
 
